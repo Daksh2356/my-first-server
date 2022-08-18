@@ -1,4 +1,4 @@
-const http = require("hhtp");
+const http = require("http");
 
 const port = 8081;
 
@@ -9,7 +9,5 @@ http
         response.end();
     })
     .listen(port, () => {
-        console.log(`I created my first node.js server and it started on port ${port}`);
+        console.log(`Node.js started running on port ${port}`);
     });
-
-
