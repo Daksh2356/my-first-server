@@ -2,7 +2,7 @@ const http = require("http");
 
 const port = 8081;
 
-const todoList = ["Complete Node Byte", "Play songs!!"];
+const todoList = ["Complete Node Byte", "Play games"];
 
 http
     .createServer((req, res) => {
@@ -14,15 +14,48 @@ http
                 res.write(todoList.toString());
             } else if (method == "POST") {
                 let body = "";
-                req.on('error', (err) => {
-                    console.error(err);
-                }).on('data', (chunk) => {
-                    console.log(chunk);
-                    body += chunk;
-                }).on('end', () => {
-                    body = JSON.parse(body);
-                    console.log("data:", body);
-                })
+                req
+                    .on("error", (err) => {
+                        console.error(err);
+                    })
+                    .on("data", (chunk) => {
+                        console.log(chunk);
+                        body += chunk;
+                    })
+                    .on("end", () => {
+                        body = JSON.parse(body);
+                        let newArray = todoList;
+                        newArray.push(body.item);
+                        console.log(newArray);
+                        console.log(todoList);
+                        res.writeHead(201);
+                    });
+            } else if (method == "DELETE") {
+                let body = "";
+                req
+                    .on("error", (err) => {
+                        console.error(err);
+                    })
+                    .on("data", (chunk) => {
+                        body += chunk;
+                    })
+                    .on("end", () => {
+                        body = JSON.parse(body);
+                        let deleteThis = body.item;
+
+                        // for (let i = 0; i < todoList.length; i++) {
+                        //     if (todoList[i] == deleteThis) {
+                        //         todoList.splice(i, 1);
+                        //         break;
+                        //     }
+                        // }
+
+                        todoList.find((element, index) => {
+                            if (element == deleteThis) {
+                                todoList.splice(index, 1);
+                            }
+                        })
+                    });
             } else {
                 res.writeHead(501);
             }
