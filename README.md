@@ -1,4 +1,4 @@
 # my-first-server
-Practicing Node Js 
-Made use of GET and POST ( server HTTP request methods )
-Made a simple TODO SERVER
+
+Intro to ExpressJS
+Implemented my first server with help of expressJS methods
