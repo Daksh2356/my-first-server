@@ -33,7 +33,12 @@ app.delete("/todos", (req, res) => {
     message: `Deleted item - ${itemToDelete}`,
   });
 });
-// all the other methods in /todos route
+
+// just some additional examples
+// app.get('/todos/create');
+// app.post('/todos/create');
+
+// put,patch all the other methods on /todos route ( a particular route)
 app.all("/todos", (req, res) => {
   res.status(501).send();
 });
@@ -42,10 +47,6 @@ app.all("/todos", (req, res) => {
 app.all("*", (req, res) => {
   res.send(404).send();
 });
-
-// just some additional examples
-// app.get('/todos/create');
-// app.post('/todos/create');
 
 app.listen(port, () => {
   // callback
